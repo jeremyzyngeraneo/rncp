@@ -18,14 +18,11 @@ dependencies = [
 dynamic = ["version"]
 
 [project.urls]
-"Homepage" = "https://github.com/aneoconsulting/ArmoniK.Admin.CLI"
-"Bug Tracker" = "https://github.com/aneoconsulting/ArmoniK/issues"
+"Homepage" = "https://github.com/jeremyzyngeraneo/rncp"
 
 [project.scripts]
 armonik_admin_cli = "armonik_cli.admin:main"
 
-[tool.setuptools_scm]
-write_to = "pkg/_version.py"
 
 [tool.setuptools.packages.find]
 where= ["src"]
