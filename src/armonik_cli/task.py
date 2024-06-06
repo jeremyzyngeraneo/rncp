@@ -1,10 +1,17 @@
 from armonik.client.tasks import ArmoniKTasks, TaskFieldFilter
 from armonik.common import Filter
 import grpc
-from armonik.common.enumwrapper import TASK_STATUS_ERROR, TASK_STATUS_CREATING , SESSION_STATUS_RUNNING, SESSION_STATUS_CANCELLED, RESULT_STATUS_COMPLETED, RESULT_STATUS_CREATED
+from armonik.common.enumwrapper import (
+    TASK_STATUS_ERROR,
+    TASK_STATUS_CREATING,
+    SESSION_STATUS_RUNNING,
+    SESSION_STATUS_CANCELLED,
+    RESULT_STATUS_COMPLETED,
+    RESULT_STATUS_CREATED,
+)
 
 
-def create_task_filter(partition:str, session_id: str, creating: bool) -> Filter:
+def create_task_filter(partition: str, session_id: str, creating: bool) -> Filter:
     """
     Create a task Filter based on the provided options
 
@@ -20,16 +27,21 @@ def create_task_filter(partition:str, session_id: str, creating: bool) -> Filter
     if session_id:
         tasks_filter = TaskFieldFilter.SESSION_ID == session_id
     elif session_id and partition:
-        tasks_filter = (TaskFieldFilter.SESSION_ID == session_id) & (TaskFieldFilter.PARTITION_ID == partition)
+        tasks_filter = (TaskFieldFilter.SESSION_ID == session_id) & (
+            TaskFieldFilter.PARTITION_ID == partition
+        )
     elif partition:
         tasks_filter = TaskFieldFilter.PARTITION_ID == partition
     elif creating and creating:
-        tasks_filter = (TaskFieldFilter.SESSION_ID == session_id) & (TaskFieldFilter.STATUS == TASK_STATUS_CREATING)
+        tasks_filter = (TaskFieldFilter.SESSION_ID == session_id) & (
+            TaskFieldFilter.STATUS == TASK_STATUS_CREATING
+        )
     else:
-            raise ValueError("SELECT ARGUMENT [--creating ]")
+        raise ValueError("SELECT ARGUMENT [--creating ]")
 
     return tasks_filter
-    
+
+
 def list_tasks(client: ArmoniKTasks, task_filter: Filter):
     """
     List tasks associated with the specified sessions based on filter options
@@ -43,11 +55,12 @@ def list_tasks(client: ArmoniKTasks, task_filter: Filter):
     tasks = client.list_tasks(task_filter, page=page)
     while len(tasks[1]) > 0:
         for task in tasks[1]:
-            print(f'Task ID: {task.id}')
+            print(f"Task ID: {task.id}")
         page += 1
         tasks = client.list_tasks(task_filter, page=page)
 
     print(f"\nTotal tasks: {tasks[0]}\n")
+
 
 def get_task_durations(client: ArmoniKTasks, task_filter: Filter):
     """
@@ -73,7 +86,6 @@ def get_task_durations(client: ArmoniKTasks, task_filter: Filter):
         print(f"Partition: {partition} = {duration} secondes")
 
 
-
 def check_task(client: ArmoniKTasks, task_ids: list):
     """
     Check the status of a task based on its ID.
@@ -89,6 +101,7 @@ def check_task(client: ArmoniKTasks, task_ids: list):
             print(tasks)
         else:
             print(f"No task found with ID {task_id}")
+
 
 def hello():
     return "Hello, Task!"
