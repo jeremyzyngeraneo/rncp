@@ -10,17 +10,23 @@ def list_sessions(client: ArmoniKSessions, session_filter: Filter):
     Args:
         client (ArmoniKSessions): ArmoniKSessions instance for session management
         session_filter (Filter) : Filter for the session
+
+    Returns:
+        List[str]: A list of session IDs that match the filter criteria
     """
+    result = []
     page = 0
     sessions = client.list_sessions(session_filter, page=page)
 
     while len(sessions[1]) > 0:
         for session in sessions[1]:
+            result.append(session.session_id)
             print(f"Session ID: {session.session_id}")
         page += 1
         sessions = client.list_sessions(session_filter, page=page)
 
     print(f"\nNumber of sessions: {sessions[0]}\n")
+    return result
 
 
 def check_session(client: ArmoniKSessions, session_ids: list):
@@ -36,6 +42,7 @@ def check_session(client: ArmoniKSessions, session_ids: list):
         if session_id == sessions.session_id:
             print(f"\nTask information for task ID {session_id} :\n")
             print(sessions)
+            return sessions
         else:
             print(f"No task found with ID {session_id}")
 
