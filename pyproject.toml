@@ -40,5 +40,6 @@ tests = [
   'coverage',
   'pytest',
   'pytest-cov',
+  'requests',
   'pytest-benchmark[histogram]',
 ]
