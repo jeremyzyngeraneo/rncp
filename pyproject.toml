@@ -21,7 +21,7 @@ dynamic = ["version"]
 "Homepage" = "https://github.com/jeremyzyngeraneo/rncp"
 
 [project.scripts]
-armonik_admin_cli = "armonik_cli.admin:main"
+akctl = "armonik_cli.admin:main"
 
 
 [tool.setuptools.packages.find]
