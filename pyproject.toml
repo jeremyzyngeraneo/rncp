@@ -3,7 +3,7 @@ requires = ["setuptools", "setuptools-scm"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "armonik_cli"
+name = "armonik-cli"
 description = "A CLI to administrate ArmoniK orchestrator"
 readme = "README.md"
 requires-python = ">=3.8"
@@ -23,6 +23,9 @@ dynamic = ["version"]
 [project.scripts]
 akctl = "armonik_cli.admin:main"
 
+[tool.setuptools]
+include-package-data = true
+dynamic = {version = {attr = "armonik_cli.__version__"}}
 
 [tool.setuptools.packages.find]
 where= ["src"]
