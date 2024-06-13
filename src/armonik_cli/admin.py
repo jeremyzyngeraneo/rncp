@@ -2,6 +2,7 @@ import sys
 import argparse
 from argparse import RawTextHelpFormatter
 import grpc
+import armonik_cli
 import armonik_cli.session as session
 import armonik_cli.task as task
 import armonik_cli.result as result
@@ -58,7 +59,7 @@ def main():
         formatter_class=RawTextHelpFormatter,
     )
     parser.add_argument(
-        "-v", "--version", action="version", version="ArmoniK Admin CLI 0.0.1"
+        "-v", "--version", action="version", version=armonik_cli.__version__
     )
     parser.add_argument(
         "--endpoint", default="localhost:5001", help="ArmoniK control plane endpoint"
