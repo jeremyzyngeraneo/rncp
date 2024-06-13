@@ -1,4 +1,4 @@
-from armonik.client.sessions import ArmoniKSessions, SessionFieldFilter
+from armonik.client.sessions import ArmoniKSessions
 from armonik.common import Filter
 import grpc
 

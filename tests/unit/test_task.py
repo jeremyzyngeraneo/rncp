@@ -2,7 +2,6 @@
 
 """Tests for `armonik_cli` package."""
 
-
 from src.armonik_cli.task import hello
 
 

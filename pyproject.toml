@@ -46,3 +46,6 @@ tests = [
   'requests',
   'pytest-benchmark[histogram]',
 ]
+
+[tool.ruff.format]
+exclude = ["src/armonik_cli/admin.py"]

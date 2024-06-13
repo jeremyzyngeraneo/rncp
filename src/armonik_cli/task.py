@@ -1,13 +1,7 @@
 from armonik.client.tasks import ArmoniKTasks, TaskFieldFilter
 from armonik.common import Filter
-import grpc
 from armonik.common.enumwrapper import (
-    TASK_STATUS_ERROR,
     TASK_STATUS_CREATING,
-    SESSION_STATUS_RUNNING,
-    SESSION_STATUS_CANCELLED,
-    RESULT_STATUS_COMPLETED,
-    RESULT_STATUS_CREATED,
 )
 
 

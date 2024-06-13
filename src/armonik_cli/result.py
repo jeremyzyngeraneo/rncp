@@ -1,6 +1,5 @@
-from armonik.client.results import ArmoniKResults, ResultFieldFilter
+from armonik.client.results import ArmoniKResults
 from armonik.common import Filter
-import grpc
 
 
 def list_results(client: ArmoniKResults, result_filter: Filter):
