@@ -51,7 +51,7 @@ clean-test: ## remove test and coverage artifacts
 lint: ## fix lint violation
 	ruff --fix check .
 
-lint: ## format code as defined
+format: ## format code as defined
 	ruff format .
 
 test: ## run tests quickly with the default Python
@@ -79,3 +79,7 @@ dist: clean ## builds source and wheel package
 install: clean ## install the package to the active Python's site-packages
 	pip uninstall -y armonik_cli
 	pip install armonik_cli
+
+install-dev:
+	pip uninstall -y armonik_cli
+	pip install -e .
