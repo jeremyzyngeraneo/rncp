@@ -18,48 +18,71 @@ sudo apt install python3-venv
 
 ## Installation
 
-### Following steps for manual installation
+### Prerequisites
 
-Clone the project from https://github.com/aneoconsulting
+- Python 3.10
+- pip (Python package installer)
 
-```bash
-git clone git@github.com/aneoconsulting/ArmoniK.Admin.CLI.git
-```
+### Setting up a Virtual Environment
 
-Navigate in the root directory
-
-```bash
-cd ArmoniK.Admin.CLI
-```
-
-Create and activate the virtual environment
+It's a good practice to use a virtual environment to isolate your project dependencies. Create a virtual environment using `venv`:
 
 ```bash
-python -m venv ./venv
-source ./venv/bin/activate
+python3 -m venv .venv
 ```
 
-Install the build module and generate the archive and .whl file to install dependencies
+Activate the virtual environment:
+
+* On Windows:
+
+```powershell
+.\.venv\Scripts\activate
+```
+
+* On Unix or MacOS:
 
 ```bash
-pip install build
-python -m build
+source .venv/bin/activate
 ```
 
-Install dependencies using the generated .whl file
+### Installing the project using pip
+
+Once the virtual environment is activated, you can install the project using pip.
 
 ```bash
-pip install dist/<name_of_the_package>.whl
+pip install armonik_cli
 ```
 
-## Documentation
+This will install the project and its dependencies.
 
-[Documentation](https://aneoconsulting.github.io/ArmoniK.Admin.CLI/api/index.html) (TODO)
+### Installing the project from sources
+
+You can also intall the project from sources by cloning the repository.
+
+```bash
+git clone git@github.com:aneoconsulting/ArmoniK.Admin.CLI.git
+```
+
+Navigate to the project directory and run:
+
+```bash
+pip install .
+```
+
+For development, you might want to install additional packages for testing, linting, etc. Install the development dependencies using:
+
+```bash
+pip install -e .[dev,tests]
+```
+
 
 
 ## Contributing
 
 Contributions are always welcome!
 
-See [CONTRIBUTING.md](https://github.com/aneoconsulting/ArmoniK.Api/blob/main/CONTRIBUTING.md) for ways to get started.
-# rncp
+See [CONTRIBUTING.md](CONTRIBUTING.md) for ways to get started.
+
+## License
+
+[Apache Software License 2.0](LICENSE)
