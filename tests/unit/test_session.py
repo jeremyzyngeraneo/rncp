@@ -6,7 +6,6 @@ import datetime
 
 import armonik_cli.session as session
 from .conftest import rpc_called, get_client
-from armonik.common.enumwrapper import SessionStatus
 from armonik.client.sessions import SessionFieldFilter, ArmoniKSessions
 from armonik.common import SessionStatus, TaskOptions
 

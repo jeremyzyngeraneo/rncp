@@ -62,6 +62,20 @@ jobs:
       - name: Install dependencies
         run: python -m pip install .[tests]
 
+      - name: Install .NET Core
+        uses: actions/setup-dotnet@4d6c8fcf3c8f7a60068d26b594648e99df24cee3 # v4
+        with:
+          dotnet-version: 6.x
+
+      - name: Clone API repository
+        run: git clone https://github.com/aneoconsulting/ArmoniK.Api.git
+
+      - name: Start Mock server
+        run: |
+          cd ArmoniK.Api/packages/csharp/ArmoniK.Api.Mock
+          nohup dotnet run > /dev/null 2>&1 &
+          sleep 60
+
       - name: Run tests
         run: python -m pytest tests
 
