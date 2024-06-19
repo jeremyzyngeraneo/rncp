@@ -6,6 +6,7 @@ import armonik_cli
 import armonik_cli.session as session
 import armonik_cli.task as task
 import armonik_cli.result as result
+import armonik_cli.bench as bench
 from armonik.client.sessions import ArmoniKSessions, SessionFieldFilter
 from armonik.client.tasks import ArmoniKTasks
 from armonik.client.results import ArmoniKResults, ResultFieldFilter
@@ -96,6 +97,9 @@ def main():
 
     partition_parser = subparsers.add_parser("partition", help="manage partitions")
     partition_parser.set_defaults(func=lambda _: partition_parser.print_help())
+
+    bench_parser = subparsers.add_parser("bench", help="manage bench")
+    bench_parser.set_defaults(func=lambda _: bench_parser.print_help())
 
     config_parser = subparsers.add_parser(
         "config",
@@ -226,6 +230,76 @@ def main():
         func=lambda args: result.list_results(result_client, args.filter)
     )
 
+    ### BENCH SUBCOMMAND ###
+    bench_subparsers = bench_parser.add_subparsers(title="BENCH SUBCOMMANDS")
+
+    ### SECOND LEVEL BENCH SUBCOMMAND ###
+    campaigns_parser = bench_subparsers.add_parser('campaigns', help='Manage campaigns')
+    campaigns_parser.set_defaults(func=lambda _: campaigns_parser.print_help())
+
+    experiments_parser = bench_subparsers.add_parser('experiments', help='Manage experiments')
+    experiments_parser.set_defaults(func=lambda _: experiments_parser.print_help())
+
+    workloads_parser = bench_subparsers.add_parser('workloads', help='Manage workloads')
+    workloads_parser.set_defaults(func=lambda _: workloads_parser.print_help())
+    
+    environments_parser = bench_subparsers.add_parser('environments', help='Manage environments')
+    environments_parser.set_defaults(func=lambda _: environments_parser.print_help())
+
+    runs_parser = bench_subparsers.add_parser('runs', help='Manage experiment runs')
+    runs_parser.set_defaults(func=lambda _: runs_parser.print_help())
+
+
+    ### CAMPAIGNS SUBCOMMAND ###
+    campaigns_subparsers = campaigns_parser.add_subparsers(title='CAMPAIGNS SUBCOMMANDS', dest='campaigns_command')
+
+    # LIST CAMPAIGNS
+    list_campaigns_parser = campaigns_subparsers.add_parser(
+        "list", help="list all campaigns"
+    )
+    list_campaigns_parser.set_defaults(
+        func=lambda args: bench.list_campaigns()
+    )
+
+    # GET CAMPAIGN 
+    get_campaigns_parser = campaigns_subparsers.add_parser(
+        "get", help="get details of a campaign"
+    )
+    get_campaigns_parser.add_argument(
+        "campaign_id", type=int, help="ID of the campaign to fetch"
+    )
+    get_campaigns_parser.set_defaults(
+        func=lambda args: bench.get_campaign([args.campaign_id])
+    )
+
+    # EDIT CAMPAIGN
+    edit_campaigns_parser = campaigns_subparsers.add_parser(
+        "edit", help="edit a campaign"
+    )
+    edit_campaigns_parser.add_argument(
+        "campaign_id", type=int, help="ID of the campaign to edit"
+    )
+    edit_campaigns_parser.add_argument(
+        "field", type=str, help="field to update"
+    )
+    edit_campaigns_parser.add_argument(
+        "update_value", type=str, help="new value"
+    )
+    edit_campaigns_parser.set_defaults(
+        func=lambda args: bench.edit_campaign(args.campaign_id, args.field, args.update_value)
+    )
+
+    #DELETE CAMPAIGN
+    delete_campaigns_parser = campaigns_subparsers.add_parser(
+        "delete", help="delete  a campaign"
+    )
+    delete_campaigns_parser.add_argument(
+        "campaign_id", type=int, help="ID of the campaign to delete"
+    )
+    delete_campaigns_parser.set_defaults(
+        func=lambda args: bench.delete_campaign(args.campaign_id)
+    )
+ 
 
     args = parser.parse_args()
     grpc_channel = create_channel(args.endpoint, args.ca, args.key, args.cert)
