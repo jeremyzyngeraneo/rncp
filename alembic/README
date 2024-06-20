@@ -9,7 +9,7 @@ cp example.env .env
 ### 2 . Update `.env`
 
 ```bash
-DATABASE_URL=postgresql://user:password@localhost:5432/mydatabase
+DATABASE_URL=postgresql+psycopg2://user:password@localhost:5432/db
 ```
 
 ### 3 . Run DB
