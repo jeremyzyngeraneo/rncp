@@ -92,23 +92,3 @@ class CampaignExperiment(Base):
         Integer, ForeignKey("experiment.experiment_id"), primary_key=True
     )
     campaign_id = Column(Integer, ForeignKey("campaign.campaign_id"), primary_key=True)
-
-
-# Base.metadata.drop_all(bind=engine)
-Base.metadata.create_all(bind=engine)
-
-# created_at_datetime = datetime.fromtimestamp(1718752005)
-# updated_at_datetime = datetime.fromtimestamp(1718752005)
-
-# with Session(engine) as session:
-#     campaign = Campaign(
-#         campaign_id = 1,
-#         name = "campaign",
-#         description = "dest",
-#         author = "jeremy",
-#         status = "finish",
-#         created_at = created_at_datetime,
-#         updated_at = updated_at_datetime
-#     )
-#     session.add(campaign)
-#     session.commit()

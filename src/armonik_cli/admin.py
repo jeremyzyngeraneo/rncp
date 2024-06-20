@@ -299,6 +299,17 @@ def main():
     delete_campaigns_parser.set_defaults(
         func=lambda args: bench.delete_campaign(args.campaign_id)
     )
+
+    # CREATE CAMPAIGN
+    create_campaigns_parser = campaigns_subparsers.add_parser(
+        "create", help="create a campaign"
+    )
+    create_campaigns_parser.add_argument(
+        "json_path", type=str, help="json_path of the campaign"
+    )
+    create_campaigns_parser.set_defaults(
+        func=lambda args: bench.create_campaign(args.json_path)
+    )
  
 
     args = parser.parse_args()
