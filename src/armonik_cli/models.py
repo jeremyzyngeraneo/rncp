@@ -1,5 +1,4 @@
 from sqlalchemy import (
-    create_engine,
     Column,
     Integer,
     String,
@@ -9,10 +8,6 @@ from sqlalchemy import (
 )
 from sqlalchemy.orm import DeclarativeBase
 from datetime import datetime
-
-DATABASE_URL = "postgresql+psycopg2://user:password@localhost:5432/db"
-
-engine = create_engine(DATABASE_URL)
 
 
 class Base(DeclarativeBase):
@@ -92,5 +87,3 @@ class CampaignExperiment(Base):
         Integer, ForeignKey("experiment.experiment_id"), primary_key=True
     )
     campaign_id = Column(Integer, ForeignKey("campaign.campaign_id"), primary_key=True)
-
-
